@@ -2,31 +2,50 @@
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
   <defs>
     <style>
-      .rifle-barrel { fill: #2c3e50; }
-      .rifle-stock { fill: #c0392b; }
-      .rifle-detail { fill: #e74c3c; }
-      .rifle-accent { fill: #f1c40f; }
+      .rifle-stock { fill: #8B4513; }
+      .rifle-barrel { fill: #A9A9A9; }
+      .rifle-metal { fill: #D4AF37; }
+      .rifle-accent { fill: #654321; }
     </style>
   </defs>
   
-  <!-- Rifle barrel - LARGER -->
-  <rect class="rifle-barrel" x="30" y="90" width="150" height="20" rx="10"/>
-  
-  <!-- Rifle stock/handle - BIGGER -->
-  <path class="rifle-stock" d="M 170 90 L 230 40 L 245 65 L 200 110 Z"/>
-  
-  <!-- Rifle details - BIGGER -->
-  <rect class="rifle-detail" x="175" y="85" width="8" height="16"/>
-  <rect class="rifle-detail" x="195" y="85" width="8" height="16"/>
-  <rect class="rifle-detail" x="215" y="85" width="8" height="16"/>
-  
-  <!-- Accent details - MORE VISIBLE -->
-  <rect class="rifle-accent" x="35" y="75" width="120" height="8"/>
-  <circle class="rifle-accent" cx="50" cy="100" r="6"/>
-  <circle class="rifle-accent" cx="90" cy="100" r="6"/>
-  <circle class="rifle-accent" cx="130" cy="100" r="6"/>
-  
-  <!-- Scope on top -->
-  <circle class="rifle-barrel" cx="110" cy="70" r="8"/>
-  <rect class="rifle-barrel" x="105" y="55" width="10" height="15"/>
+  <!-- Tilted rifle group (rotated -15 degrees) -->
+  <g transform="translate(128, 128) rotate(-15) translate(-128, -128)">
+    
+    <!-- Rifle stock (wood) - dark red/brown -->
+    <path class="rifle-stock" d="M 40 120 L 80 110 L 85 130 L 45 140 Z"/>
+    <ellipse class="rifle-stock" cx="50" cy="125" rx="15" ry="20"/>
+    
+    <!-- Stock details - circular inlays -->
+    <circle class="rifle-metal" cx="55" cy="115" r="3"/>
+    <circle class="rifle-metal" cx="65" cy="120" r="3"/>
+    <circle class="rifle-metal" cx="75" cy="125" r="3"/>
+    
+    <!-- Trigger guard -->
+    <path class="rifle-metal" d="M 75 125 Q 85 135 90 135 L 90 120 Q 85 120 75 120 Z" fill="none" stroke="#D4AF37" stroke-width="3"/>
+    
+    <!-- Barrel (silver/gray) - long and prominent -->
+    <rect class="rifle-barrel" x="85" y="115" width="140" height="12" rx="6"/>
+    
+    <!-- Barrel bands (gold) -->
+    <rect class="rifle-metal" x="100" y="112" width="8" height="18" rx="4"/>
+    <rect class="rifle-metal" x="130" y="112" width="8" height="18" rx="4"/>
+    <rect class="rifle-metal" x="160" y="112" width="8" height="18" rx="4"/>
+    
+    <!-- Front sight -->
+    <rect class="rifle-metal" x="210" y="110" width="4" height="14" rx="2"/>
+    <rect class="rifle-metal" x="208" y="108" width="8" height="3" rx="1"/>
+    
+    <!-- Muzzle -->
+    <circle class="rifle-barrel" cx="225" cy="121" r="5"/>
+    
+    <!-- Top scope rail -->
+    <rect class="rifle-metal" x="95" y="108" width="115" height="4" rx="2"/>
+    
+    <!-- Scope -->
+    <ellipse class="rifle-barrel" cx="140" cy="98" rx="12" ry="15"/>
+    <ellipse class="rifle-metal" cx="140" cy="98" rx="10" ry="13"/>
+    <circle class="rifle-accent" cx="140" cy="98" r="6"/>
+    
+  </g>
 </svg>
