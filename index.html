@@ -93,7 +93,7 @@ tr:hover {
 .down { color: #ef4444; }
 .flat { color: #facc15; }
 
-/* HOVER PANEL */
+/* PREVIEW */
 #preview {
     position: fixed;
     right: 20px;
@@ -148,14 +148,14 @@ tr:hover {
 
 </div>
 
-<!-- HOVER PREVIEW -->
+<!-- PREVIEW BOX -->
 <div id="preview"></div>
 
 <script>
 
 let view = "auction";
 
-/* 🏦 AUCTION DATABASE */
+/* AUCTION DATA */
 let auction = [
     {
         name:"Guycot Chain Pistol",
@@ -164,7 +164,7 @@ let auction = [
         bid:"$7,000",
         trend:"up",
         description:"30-shot automatic chain pistol.",
-        image:"https://via.placeholder.com/120x80?text=Guycot"
+        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Guycot"
     },
     {
         name:"Schwarzlose Prototype Pistol",
@@ -172,8 +172,8 @@ let auction = [
         price:"$60,000",
         bid:"$21,000",
         trend:"up",
-        description:"Automatic 7-shot magazine pistol.",
-        image:"https://via.placeholder.com/120x80?text=Schwarzlose"
+        description:"7-shot automatic pistol.",
+        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Schwarzlose"
     },
     {
         name:"Lancaster Pistol",
@@ -181,8 +181,8 @@ let auction = [
         price:"$60,000",
         bid:"$21,000",
         trend:"flat",
-        description:"Quad-barrel high power pistol.",
-        image:"https://via.placeholder.com/120x80?text=Lancaster"
+        description:"Quad-barrel pistol.",
+        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Lancaster"
     },
     {
         name:"Paterson Navy",
@@ -190,8 +190,8 @@ let auction = [
         price:"$80,000",
         bid:"$28,000",
         trend:"up",
-        description:"A large 6 shot single action revolver.",
-        image:"https://via.placeholder.com/120x80?text=Paterson"
+        description:"Large 6 shot single action revolver.",
+        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Paterson"
     },
     {
         name:"Admiral's Axegonne",
@@ -200,16 +200,16 @@ let auction = [
         bid:"$35,000",
         trend:"up",
         description:"Axe with built-in pistol.",
-        image:"https://via.placeholder.com/120x80?text=Axegonne"
+        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Axegonne"
     },
     {
         name:"Spitfire Revolving Sniper",
-        type:"Sniper Rifle",
+        type:"Sniper",
         price:"$120,000+",
         bid:"$42,000",
         trend:"up",
         description:"Burst/automatic sniper rifle.",
-        image:"https://via.placeholder.com/120x80?text=Spitfire"
+        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Spitfire"
     },
     {
         name:"Jezail Musket",
@@ -218,7 +218,7 @@ let auction = [
         bid:"$28,000",
         trend:"up",
         description:"High accuracy single-shot musket.",
-        image:"https://via.placeholder.com/120x80?text=Jezail"
+        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Jezail"
     },
     {
         name:"Kukri Machete",
@@ -226,12 +226,12 @@ let auction = [
         price:"$80,000",
         bid:"$28,000",
         trend:"up",
-        description:"Massive machete. Two-hit kill overhead blade.",
+        description:"Massive machete. Two-hit overhead kill weapon.",
         image:"https://static.wikia.nocookie.net/thewild-west/images/d/df/Kukri_Icon_4.0.png/revision/latest?cb=20250510083202"
     }
 ];
 
-/* 🎯 EVENTS (simple placeholder) */
+/* EVENTS */
 let events = [
     {
         name:"Cursed Lantern",
@@ -240,7 +240,7 @@ let events = [
         bid:"N/A",
         trend:"flat",
         description:"Event item.",
-        image:"https://via.placeholder.com/120x80?text=Event"
+        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Event"
     }
 ];
 
@@ -257,7 +257,7 @@ function getTrend(t){
     return `<span class="flat">➜</span>`;
 }
 
-/* 🖱️ HOVER PREVIEW */
+/* SHOW PREVIEW */
 function showPreview(item){
     let box = document.getElementById("preview");
 
@@ -268,8 +268,11 @@ function showPreview(item){
             ${item.name}
         </div>
 
-        <img src="${item.image}"
-        style="width:100%; border:1px solid #1f2937; margin-bottom:6px;">
+        <img 
+            src="${item.image}"
+            onerror="this.src='https://via.placeholder.com/240x120/0f172a/22c55e?text=No+Image'"
+            style="width:100%; border:1px solid #1f2937; margin-bottom:6px;"
+        >
 
         <div style="color:#9ca3af;">
             ${item.description || "No description available."}
@@ -277,6 +280,12 @@ function showPreview(item){
     `;
 }
 
+/* HIDE PREVIEW */
+function hidePreview(){
+    document.getElementById("preview").style.display = "none";
+}
+
+/* RENDER TABLE */
 function render(){
 
     let search = document.getElementById("search").value.toUpperCase();
@@ -291,7 +300,10 @@ function render(){
         if(!item.name.toUpperCase().includes(search)) return;
 
         tbody.innerHTML += `
-        <tr onmouseover='showPreview(${JSON.stringify(item)})'>
+        <tr 
+            onmouseover='showPreview(${JSON.stringify(item)})'
+            onmouseout='hidePreview()'
+        >
             <td>${item.name}</td>
             <td>${item.type}</td>
             <td>${item.price}</td>
