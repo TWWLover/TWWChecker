@@ -119,10 +119,8 @@ tr:hover {
 
 <!-- SIDEBAR -->
 <div class="sidebar">
-
-<div class="tab active" onclick="setView('auction', this)">AUCTION HOUSE</div>
-<div class="tab" onclick="setView('events', this)">EVENT ITEMS</div>
-
+    <div class="tab active" onclick="setView('auction', this)">AUCTION HOUSE</div>
+    <div class="tab" onclick="setView('events', this)">EVENT ITEMS</div>
 </div>
 
 <!-- MAIN -->
@@ -148,14 +146,14 @@ tr:hover {
 
 </div>
 
-<!-- PREVIEW BOX -->
+<!-- PREVIEW -->
 <div id="preview"></div>
 
 <script>
 
 let view = "auction";
 
-/* AUCTION DATA */
+/* AUCTION HOUSE */
 let auction = [
     {
         name:"Guycot Chain Pistol",
@@ -163,8 +161,7 @@ let auction = [
         price:"$20,000",
         bid:"$7,000",
         trend:"up",
-        description:"30-shot automatic chain pistol.",
-        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Guycot"
+        description:"30-shot automatic chain pistol."
     },
     {
         name:"Schwarzlose Prototype Pistol",
@@ -172,8 +169,7 @@ let auction = [
         price:"$60,000",
         bid:"$21,000",
         trend:"up",
-        description:"7-shot automatic pistol.",
-        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Schwarzlose"
+        description:"Automatic 7-shot pistol."
     },
     {
         name:"Lancaster Pistol",
@@ -181,8 +177,7 @@ let auction = [
         price:"$60,000",
         bid:"$21,000",
         trend:"flat",
-        description:"Quad-barrel pistol.",
-        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Lancaster"
+        description:"Quad-barrel pistol."
     },
     {
         name:"Paterson Navy",
@@ -190,17 +185,15 @@ let auction = [
         price:"$80,000",
         bid:"$28,000",
         trend:"up",
-        description:"Large 6 shot single action revolver.",
-        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Paterson"
+        description:"A large 6 shot single action revolver."
     },
     {
         name:"Admiral's Axegonne",
-        type:"Gun",
+        type:"Gun/Melee",
         price:"$100,000",
         bid:"$35,000",
         trend:"up",
-        description:"Axe with built-in pistol.",
-        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Axegonne"
+        description:"An axe with a single-shot caplock pistol built into the handle."
     },
     {
         name:"Spitfire Revolving Sniper",
@@ -208,8 +201,7 @@ let auction = [
         price:"$120,000+",
         bid:"$42,000",
         trend:"up",
-        description:"Burst/automatic sniper rifle.",
-        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Spitfire"
+        description:"Burst/automatic sniper rifle."
     },
     {
         name:"Jezail Musket",
@@ -217,8 +209,7 @@ let auction = [
         price:"$80,000+",
         bid:"$28,000",
         trend:"up",
-        description:"High accuracy single-shot musket.",
-        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Jezail"
+        description:"High accuracy single-shot musket."
     },
     {
         name:"Kukri Machete",
@@ -226,8 +217,7 @@ let auction = [
         price:"$80,000",
         bid:"$28,000",
         trend:"up",
-        description:"Massive machete. Two-hit overhead kill weapon.",
-        image:"https://static.wikia.nocookie.net/thewild-west/images/d/df/Kukri_Icon_4.0.png/revision/latest?cb=20250510083202"
+        description:"Massive melee weapon. Two-hit overhead kill blade."
     }
 ];
 
@@ -239,8 +229,7 @@ let events = [
         price:"N/A",
         bid:"N/A",
         trend:"flat",
-        description:"Event item.",
-        image:"https://via.placeholder.com/240x120/0f172a/22c55e?text=Event"
+        description:"Event item."
     }
 ];
 
@@ -257,7 +246,7 @@ function getTrend(t){
     return `<span class="flat">➜</span>`;
 }
 
-/* SHOW PREVIEW */
+/* HOVER PREVIEW (NO IMAGES) */
 function showPreview(item){
     let box = document.getElementById("preview");
 
@@ -268,11 +257,17 @@ function showPreview(item){
             ${item.name}
         </div>
 
-        <img 
-            src="${item.image}"
-            onerror="this.src='https://via.placeholder.com/240x120/0f172a/22c55e?text=No+Image'"
-            style="width:100%; border:1px solid #1f2937; margin-bottom:6px;"
-        >
+        <div style="color:#9ca3af; margin-bottom:6px;">
+            Type: ${item.type}
+        </div>
+
+        <div style="color:#9ca3af; margin-bottom:6px;">
+            Price: ${item.price}
+        </div>
+
+        <div style="color:#9ca3af; margin-bottom:6px;">
+            Bid: ${item.bid}
+        </div>
 
         <div style="color:#9ca3af;">
             ${item.description || "No description available."}
