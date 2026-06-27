@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <style>
+      .rifle-barrel { fill: #2c3e50; }
+      .rifle-stock { fill: #c0392b; }
+      .rifle-detail { fill: #e74c3c; }
+      .rifle-accent { fill: #f1c40f; }
+    </style>
+  </defs>
+  
+  <!-- Rifle barrel -->
+  <rect class="rifle-barrel" x="8" y="20" width="36" height="6" rx="3"/>
+  
+  <!-- Rifle stock/handle -->
+  <path class="rifle-stock" d="M 42 20 L 56 12 L 58 18 L 52 26 Z"/>
+  
+  <!-- Rifle details -->
+  <rect class="rifle-detail" x="44" y="22" width="2" height="4"/>
+  <rect class="rifle-detail" x="48" y="22" width="2" height="4"/>
+  <rect class="rifle-detail" x="52" y="22" width="2" height="4"/>
+  
+  <!-- Accent details -->
+  <rect class="rifle-accent" x="10" y="18" width="28" height="2"/>
+  <circle class="rifle-accent" cx="14" cy="23" r="1.5"/>
+  <circle class="rifle-accent" cx="22" cy="23" r="1.5"/>
+  <circle class="rifle-accent" cx="30" cy="23" r="1.5"/>
+</svg>
