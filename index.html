@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wild West Market Terminal</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
 
 <style>
 body {
@@ -122,6 +121,13 @@ tr:hover {
 <div class="sidebar">
     <div class="tab active" onclick="setView('auction', this)">AUCTION HOUSE</div>
     <div class="tab" onclick="setView('events', this)">EVENT ITEMS</div>
+    <div class="tab" onclick="setView('about', this)">ABOUT</div>
+
+    <!-- DISCORD BUTTON -->
+    <div class="tab" style="color:#60a5fa;"
+        onclick="window.open('https://discord.gg/dC3bkcpW5', '_blank')">
+        DISCORD SERVER
+    </div>
 </div>
 
 <!-- MAIN -->
@@ -186,7 +192,7 @@ let auction = [
         price:"$80,000",
         bid:"$28,000",
         trend:"up",
-        description:"A large 6 shot single action revolver."
+        description:"Large 6-shot revolver."
     },
     {
         name:"Admiral's Axegonne",
@@ -194,7 +200,7 @@ let auction = [
         price:"$100,000",
         bid:"$35,000",
         trend:"up",
-        description:"An axe with a single-shot caplock pistol built into the handle."
+        description:"Axe with single-shot caplock pistol."
     },
     {
         name:"Spitfire Revolving Sniper",
@@ -202,7 +208,7 @@ let auction = [
         price:"$120,000+",
         bid:"$42,000",
         trend:"up",
-        description:"Burst/automatic sniper rifle."
+        description:"Burst automatic sniper rifle."
     },
     {
         name:"Jezail Musket",
@@ -218,7 +224,7 @@ let auction = [
         price:"$80,000",
         bid:"$28,000",
         trend:"up",
-        description:"Massive melee weapon. Two-hit overhead kill blade."
+        description:"Heavy melee blade weapon."
     }
 ];
 
@@ -231,6 +237,28 @@ let events = [
         bid:"N/A",
         trend:"flat",
         description:"Event item."
+    }
+];
+
+/* ABOUT */
+let about = [
+    {
+        title: "Wild West Market Terminal",
+        text: "A stock-style tracker for The Wild West Roblox game items."
+    },
+    {
+        title: "Version",
+        text: "Version 1 - Initial release of the terminal."
+    },
+    {
+        title: "Credits",
+        text: "Made by: coleaice"
+    },
+    {
+        title: "Roblox Profile",
+        text: `<a href="https://www.roblox.com/users/1431249798/profile" target="_blank" style="color:#60a5fa; text-decoration:none;">
+        https://www.roblox.com/users/1431249798/profile
+        </a>`
     }
 ];
 
@@ -247,7 +275,7 @@ function getTrend(t){
     return `<span class="flat">➜</span>`;
 }
 
-/* HOVER PREVIEW (NO IMAGES) */
+/* PREVIEW */
 function showPreview(item){
     let box = document.getElementById("preview");
 
@@ -267,7 +295,7 @@ function showPreview(item){
         </div>
 
         <div style="color:#9ca3af; margin-bottom:6px;">
-            Bid: ${item.bid}
+            Bid: ${item.bid || "N/A"}
         </div>
 
         <div style="color:#9ca3af;">
@@ -276,12 +304,11 @@ function showPreview(item){
     `;
 }
 
-/* HIDE PREVIEW */
 function hidePreview(){
     document.getElementById("preview").style.display = "none";
 }
 
-/* RENDER TABLE */
+/* RENDER */
 function render(){
 
     let search = document.getElementById("search").value.toUpperCase();
@@ -289,21 +316,45 @@ function render(){
 
     tbody.innerHTML = "";
 
-    let list = view === "auction" ? auction : events;
+    if(view === "about"){
+
+        about.forEach(item => {
+
+            if(!item.title.toUpperCase().includes(search)) return;
+
+            tbody.innerHTML += `
+            <tr>
+                <td colspan="5">
+                    <div style="padding:10px;">
+                        <div style="color:#22c55e; font-weight:bold; margin-bottom:6px;">
+                            ${item.title}
+                        </div>
+                        <div style="color:#9ca3af;">
+                            ${item.text}
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            `;
+        });
+
+        return;
+    }
+
+    let list =
+        view === "auction" ? auction : events;
 
     list.forEach(item => {
 
         if(!item.name.toUpperCase().includes(search)) return;
 
         tbody.innerHTML += `
-        <tr 
-            onmouseover='showPreview(${JSON.stringify(item)})'
-            onmouseout='hidePreview()'
-        >
+        <tr onmouseover='showPreview(${JSON.stringify(item)})'
+            onmouseout='hidePreview()'>
             <td>${item.name}</td>
             <td>${item.type}</td>
             <td>${item.price}</td>
-            <td>${item.bid}</td>
+            <td>${item.bid || ""}</td>
             <td>${getTrend(item.trend)}</td>
         </tr>
         `;
